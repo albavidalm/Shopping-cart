@@ -12,8 +12,16 @@ const addCourse = (ev) => {
   }
 };
 
+//Remove an specific item from cart
+const removeCourse = (ev) => {
+  if (ev.target.classList.contains("borrar-curso")) {
+    const courseId = ev.target.getAttribute("data-id");
+    cartItems = cartItems.filter((course) => course.id !== courseId);
+    htmlCart();
+  }
+};
+
 const getCourseData = (course) => {
-  //console.log(course);
   const infoCourse = {
     image: course.querySelector("img").src,
     title: course.querySelector("h4").textContent,
@@ -68,3 +76,4 @@ const cleanHtml = () => {
 
 // Events ----------
 coursesList.addEventListener("click", addCourse);
+cart.addEventListener("click", removeCourse);
