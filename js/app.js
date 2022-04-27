@@ -21,7 +21,23 @@ const getCourseData = (course) => {
     id: course.querySelector("a").getAttribute("data-id"),
     quantity: 1,
   };
-  cartItems = [...cartItems, infoCourse];
+
+  //Check if an item already exists in cart
+  const existingItem = cartItems.some((course) => course.id === infoCourse.id);
+  if (existingItem) {
+    const courses = cartItems.map((course) => {
+      if (course.id === infoCourse.id) {
+        course.quantity++;
+        return course;
+      } else {
+        return course;
+      }
+    });
+    cartItems = [...courses];
+  } else {
+    cartItems = [...cartItems, infoCourse];
+  }
+
   console.log(cartItems);
   htmlCart();
 };
