@@ -45,12 +45,16 @@ const getCourseData = (course) => {
   } else {
     cartItems = [...cartItems, infoCourse];
   }
-
-  console.log(cartItems);
   htmlCart();
 };
 
-//Show cart items at DOM ------------
+//Empty cart
+const emptyCart = () => {
+  cartItems = [];
+  cleanHtml();
+};
+
+//Show cart items at DOM
 htmlCart = () => {
   cleanHtml();
   cartItems.forEach((course) => {
@@ -77,3 +81,4 @@ const cleanHtml = () => {
 // Events ----------
 coursesList.addEventListener("click", addCourse);
 cart.addEventListener("click", removeCourse);
+emptyCartBtn.addEventListener("click", emptyCart);
