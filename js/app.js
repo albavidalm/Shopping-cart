@@ -30,13 +30,14 @@ const getCourseData = (course) => {
 htmlCart = () => {
   cleanHtml();
   cartItems.forEach((course) => {
+    const { image, title, price, quantity, id } = course;
     const row = document.createElement("tr");
     row.innerHTML = `
-      <td><img src="${course.image}" width="100"</td>
-      <td>${course.title}</td>
-      <td>${course.price}</td>
-      <td>${course.quantity}</td>
-      <td><a href="#" class="borrar-curso" data-id=${course.id}> X </a></td>
+      <td><img src="${image}" width="100"</td>
+      <td>${title}</td>
+      <td>${price}</td>
+      <td>${quantity}</td>
+      <td><a href="#" class="borrar-curso" data-id=${id}> X </a></td>
       `;
     cartContainer.appendChild(row);
   });
