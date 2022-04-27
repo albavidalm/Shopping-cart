@@ -2,10 +2,7 @@ const cart = document.querySelector("#carrito");
 const cartContainer = document.querySelector("#lista-carrito tbody");
 const emptyCartBtn = document.querySelector("#vaciar-carrito");
 const coursesList = document.querySelector("#lista-cursos");
-
-/*const uploadListeners = () => {
-coursesList.addEventListener("click", addCourse);
-};*/
+let cartItems = [];
 
 const addCourse = (ev) => {
   ev.preventDefault();
@@ -16,6 +13,7 @@ const addCourse = (ev) => {
 };
 
 const getCourseData = (course) => {
+  //console.log(course);
   const infoCourse = {
     image: course.querySelector("img").src,
     title: course.querySelector("h4").textContent,
@@ -23,10 +21,27 @@ const getCourseData = (course) => {
     id: course.querySelector("a").getAttribute("data-id"),
     quantity: 1,
   };
-  console.log(infoCourse);
+  cartItems = [...cartItems, infoCourse];
+  console.log(cartItems);
+  htmlCart();
 };
 
-//uploadListeners();
+//Show cart items at DOM ------------
+htmlCart = () => {
+  cleanHtml();
+  cartItems.forEach((course) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `<td>${course.title}</td>`;
+    cartContainer.appendChild(row);
+  });
+};
+
+//Remove previous items from Cart (to not repeat them)
+const cleanHtml = () => {
+  while (cartContainer.firstChild) {
+    cartContainer.removeChild(cartContainer.firstChild);
+  }
+};
 
 // Events ----------
 coursesList.addEventListener("click", addCourse);
